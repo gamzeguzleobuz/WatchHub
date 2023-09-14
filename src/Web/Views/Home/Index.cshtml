@@ -21,3 +21,14 @@
 </p>
 
 
+<ol>
+    @foreach(var item in await productRepo.GetAllAsync())
+    {
+        <li>
+            <img src="~/img/product/@item.PictureUri" width="32" />
+            @item.Name
+        </li>
+    }
+</ol>
+
+
