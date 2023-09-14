@@ -30,4 +30,9 @@ Before running the following commands, make sure that Web is set as Startup proj
 ```
 Add-Migration InitialCreate -Context WatchHubContext -OutputDir Data/Migrations
 Update-Database -Context WatchHubContext
+
+
+
+Add-Migration InitialCreate -Context AppIdentityDbContext -OutputDir Identity/Migrations
+Update-Database -Context AppIdentityDbContext
 ```
