@@ -18,5 +18,24 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: 'Oswald', sans-serif;
 }
+
+
+.product-image > img {
+    transform: scale(.8);
+    transition: all .35s;
+}
+
+.product-image > img:hover {
+    transform: scale(.95);
+}
+
+
+.product-name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
