@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "HomePage";
+    var pi = Model.PaginationInfo;
 }
 
 <div class="card mb-3">
@@ -26,19 +27,8 @@
             <div class="col-auto">
                 <button class="btn btn-primary">Filter</button>
             </div>
-
-            
-            
-
-           
-           
-
-            
         </form>
-
-
     </div>
-
 </div>
 
 <div class="row">
@@ -66,3 +56,48 @@
     }
 </div>
 
+
+
+<nav class="d-flex justify-content-center mt-2">
+    <ul class="pagination">
+
+        @if (pi.HasPrevious)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-route-CategoryId="@Model.CategoryId" asp-route-BrandId="@Model.BrandId" asp-route-PageId="@(pi.PageId - 1)">
+                    <span><i class="fa-solid fa-angle-left"></i></span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <a class="page-link"><i class="fa-solid fa-angle-left"></i></a>
+            </li>
+        }
+
+
+        @for (int i = 1; i <= pi.TotalPages; i++)
+        {
+            <li class="page-item @(i == pi.PageId ? "active" : "")">
+                <a class="page-link" asp-route-CategoryId="@Model.CategoryId" asp-route-BrandId="@Model.BrandId" asp-route-PageId="@i">@i</a>
+            </li>
+        }
+
+
+        @if (pi.HasNext)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-route-CategoryId="@Model.CategoryId" asp-route-BrandId="@Model.BrandId" asp-route-PageId="@(pi.PageId + 1)">
+                    <span><i class="fa-solid fa-angle-right"></i></span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <a class="page-link"><i class="fa-solid fa-angle-right"></i></a>
+            </li>
+        }
+    </ul>
+</nav>
