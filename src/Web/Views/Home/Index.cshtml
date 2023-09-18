@@ -51,7 +51,6 @@
                     </a>
                 </div>
             </div>
-
         </div>
     }
 </div>
@@ -77,11 +76,22 @@
         }
 
 
-        @for (int i = 1; i <= pi.TotalPages; i++)
+        @foreach (var i in pi.PageNumbers)
         {
-            <li class="page-item @(i == pi.PageId ? "active" : "")">
-                <a class="page-link" asp-route-CategoryId="@Model.CategoryId" asp-route-BrandId="@Model.BrandId" asp-route-PageId="@i">@i</a>
-            </li>
+            if (i == -1)
+            {
+                <li class="page-item">
+                    <a class="page-link">&hellip;</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item @(i == pi.PageId ? "active" : "")">
+                    <a class="page-link" asp-route-CategoryId="@Model.CategoryId" asp-route-BrandId="@Model.BrandId" asp-route-PageId="@i">@i</a>
+                </li>
+            }
+
+          
         }
 
 
