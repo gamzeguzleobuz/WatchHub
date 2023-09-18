@@ -87,14 +87,50 @@ namespace ApplicationCore.Services
 
         }
 
-        public Task<Basket> SetQuantitiesAsync(string buyerId, Dictionary<int, int> quantities)
+        public async Task<Basket> SetQuantitiesAsync(string buyerId, Dictionary<int, int> quantities)
         {
-            throw new NotImplementedException();
+            var basket = await GetOrCreateBasketAsync(buyerId);
+
+            foreach (var item in basket.Items)
+            {
+                if (quantities.ContainsKey(item.ProductId))
+                {
+                    item.Quantity = quantities[item.ProductId];
+                    await _basketItemRepo.UpdateAsync(item);
+                }
+            }
+
+            return basket;
         }
 
-        public Task TransferBasketAsync(string sourceBuyerId, string destinationBuyerId)
+        public async Task TransferBasketAsync(string sourceBuyerId, string destinationBuyerId)
         {
-            throw new NotImplementedException();
+            var specSourceBasket = new BasketWithItemsSpecification(sourceBuyerId);
+            var sourceBasket = await _basketRepo.FirstOrDefaultAsync(specSourceBasket);
+            if (sourceBasket == null) return;
+            var destinationBasket = await GetOrCreateBasketAsync(destinationBuyerId);
+
+
+            foreach (var item in sourceBasket.Items)
+            {
+                var targetItem = destinationBasket.Items.FirstOrDefault(x => x.ProductId == item.ProductId);
+
+                if (targetItem == null)
+                {
+                    destinationBasket.Items.Add(new BasketItem()
+                    {
+                        ProductId = item.ProductId,
+                        Quantity = item.Quantity
+                    });
+                }
+                else
+                {
+                    targetItem.Quantity += item.Quantity;
+                }
+            }
+
+            await _basketRepo.UpdateAsync(destinationBasket);
+            await _basketRepo.DeleteAsync(sourceBasket);
         }
     }
 }
