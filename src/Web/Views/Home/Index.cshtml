@@ -121,6 +121,7 @@
 
             $.post("@Url.Action("AddItem", "Basket")", { productId }, function (data) {
                 $("#navbarBasketCount").text(data.totalItems);
+                successMessage("Item successfully added to basket.");
             });
         });
 
