@@ -25,6 +25,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<AppIdentityDbContext>();
 builder.Services.AddControllersWithViews();
 
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 builder.Services.AddScoped<IBasketService, BasketService>();

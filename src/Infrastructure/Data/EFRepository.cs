@@ -68,15 +68,5 @@ namespace Infrastructure.Data
             _db.Update(entity);
             await _db.SaveChangesAsync();
         }
-
-        Task<T> IRepository<T>.DeleteAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<T> IRepository<T>.UpdateAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

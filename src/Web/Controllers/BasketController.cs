@@ -6,15 +6,16 @@ namespace Web.Controllers
     {
         private IBasketViewModelService _basketViewModelService;
 
-        public BasketController(IBasketViewModelService basketViewModelService) 
+        public BasketController(IBasketViewModelService basketViewModelService)
         {
-        _basketViewModelService = basketViewModelService;
+            _basketViewModelService = basketViewModelService;
         }
 
-
-        public Task<ActionResult<BasketViewModel>> AddItem(int productId, int quantity = 1)
-        { 
-        
+        [HttpPost]
+        public async Task<ActionResult<BasketViewModel>> AddItem(int productId, int quantity = 1)
+        {
+            var basket = await _basketViewModelService.AddItemToBasketAsync(productId, quantity);
+            return basket;
         }
     }
 }

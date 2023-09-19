@@ -32,7 +32,7 @@ namespace ApplicationCore.Services
 
             if (basketItem != null)
             {
-                basketItem.Quantity += quantity;
+                basketItem.Quantity += quantity;   
             }
             else
             {
@@ -49,8 +49,9 @@ namespace ApplicationCore.Services
                     Product = product
 
                 };
+                basket.Items.Add(basketItem);
+                
             }
-
             await _basketRepo.UpdateAsync(basket);
             return basket;
         }
