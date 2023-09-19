@@ -4,17 +4,16 @@ namespace Web.ViewComponents
 {
     public class NavbarBasketViewComponent : ViewComponent
     {
-       
+       private readonly IBasketViewModelService _basketViewModelService;
 
-        public NavbarBasketViewComponent()
+        public NavbarBasketViewComponent(IBasketViewModelService basketViewModelService)
         {
-
+            _basketViewModelService = basketViewModelService;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            //login olunmuşsa kullanici id, olunmamışsa cookiede saklanan anonim id eğer o da yoksa şimdi üretilecek ve sonra cookielerde saklanacak benzersiz bir anonim id parametre olarak sokulmalı
-            
-            return View();
+            var basket = await _basketViewModelService.GetBasketViewModelAsync();
+            return View(basket);
         }
     }
 }

@@ -6,8 +6,10 @@ global using Microsoft.EntityFrameworkCore;
 global using Web.Models;
 global using ApplicationCore.Entities;
 global using Web.Interfaces;
+global using Web.Extensions;
 using Web.Services;
 using ApplicationCore.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,9 +25,11 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<AppIdentityDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 builder.Services.AddScoped<IBasketService, BasketService>();
 builder.Services.AddScoped<IHomeViewModelService, HomeViewModelService>();
+builder.Services.AddScoped<IBasketViewModelService, BasketViewModelService>();
 
 
 var app = builder.Build();
