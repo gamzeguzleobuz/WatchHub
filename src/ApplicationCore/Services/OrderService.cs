@@ -10,23 +10,19 @@ namespace ApplicationCore.Services
 {
     public class OrderService : IOrderService
     {
-        public IBasketService _basketService { get; }
-        public IRepository<Order> _orderRepo { get; }
-
         private readonly IBasketService _basketService;
+        private readonly IRepository<Order> _orderRepo;
+
+
         public OrderService(IBasketService basketService, IRepository<Order> orderRepo)
         {
             _basketService = basketService;
             _orderRepo = orderRepo;
         }
 
-
-
-        }
         public async Task<Order> CreateOrderAsync(string buyerId, Address shippingAddress)
         {
             var basket = await _basketService.GetOrCreateBasketAsync(buyerId);
-
 
             Order order = new Order()
             {
@@ -41,7 +37,9 @@ namespace ApplicationCore.Services
                     Quantity = x.Quantity
                 }).ToList()
             };
+
             return await _orderRepo.AddAsync(order);
         }
     }
 }
+
