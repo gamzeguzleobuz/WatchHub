@@ -14,10 +14,16 @@ using Web.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//builder.Services.AddDbContext<WatchHubContext>(options =>
+//    options.UseNpgsql(builder.Configuration.GetConnectionString("WatchHubContext")));
+//builder.Services.AddDbContext<AppIdentityDbContext>(options =>
+//    options.UseNpgsql(builder.Configuration.GetConnectionString("AppIdentityDbContext")));
+
 builder.Services.AddDbContext<WatchHubContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("WatchHubContext")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WatchHubContext")));
 builder.Services.AddDbContext<AppIdentityDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("AppIdentityDbContext")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AppIdentityDbContext")));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)

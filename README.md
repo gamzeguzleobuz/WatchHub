@@ -19,7 +19,7 @@ Install-Package Microsoft.EntityFrameworkCore.Design
 Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore
 Install-Package Ardalis.Specification.EntityFrameworkCore
 ```
-
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 ## Migrations
 
