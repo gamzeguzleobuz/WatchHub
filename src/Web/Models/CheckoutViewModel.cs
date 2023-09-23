@@ -5,7 +5,7 @@ namespace Web.Models
 {
     public class CheckoutViewModel
     {
-        BasketItemViewModel Basket { get; set; } = null!;
+        public BasketViewModel? Basket { get; set; } 
 
         [Required, MaxLength(180)]
         [Display(Name = "Street")]

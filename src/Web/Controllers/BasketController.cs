@@ -51,26 +51,38 @@ namespace Web.Controllers
         }
 
 
-        //[Authorize]
-        //public async Task<IActionResult> Checkout()
-        //{
-        //    var basket = await _basketViewModelService.GetBasketViewModelAsync();
+        [Authorize]
+        public async Task<IActionResult> Checkout()
+        {
+            var basket = await _basketViewModelService.GetBasketViewModelAsync();
 
-        //    var vm = new CheckoutViewModel()
-        //    {
-        //        Basket = basket
-        //    };
+            var vm = new CheckoutViewModel()
+            {
+                Basket = basket
+            };
 
-        //    return View(vm);
-        //}
+            return View(vm);
+        }
 
-        //[Authorize]
-        //[HttpPost, ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Checkout(CheckoutViewModel vm)
-        //{
-        //    vm.Basket = await _basketViewModelService.GetBasketViewModelAsync();
-        //    return View(vm);
-        //}
+        [Authorize]
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Checkout(CheckoutViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                await _basketViewModelService.CheckoutAsync(vm.Street, vm.City, vm.State, vm.Country, vm.ZipCode);
+                return RedirectToAction("OrderConfirmed");
+            }
+
+            vm.Basket = await _basketViewModelService.GetBasketViewModelAsync();
+            return View(vm);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> OrderConfirmed()
+        {
+            return View();
+        }
 
 
     }
