@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Interfaces
 {
-   public interface IOrderService
+    public interface IOrderService
     {
         Task<Order> CreateOrderAsync(string buyerId, Address shippingAddress);
     }

@@ -73,3 +73,9 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+
+    app.Run();
+
+
+// demouser@gmail.com
+// Ankara1!.

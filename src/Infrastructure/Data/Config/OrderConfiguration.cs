@@ -31,6 +31,7 @@ namespace Infrastructure.Data.Config
 
                 ba.Property(a => a.ZipCode)
                 .HasMaxLength(18);
+
             });
         }
     }

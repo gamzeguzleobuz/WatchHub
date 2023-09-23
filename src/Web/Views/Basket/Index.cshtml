@@ -122,6 +122,12 @@
     <input id="hdnProductId" type="hidden" name="productId" />
 </form>
 
+
+<form method="post" id="frmEmpty" asp-action="EmptyBasket"></form>
+<form method="post" id="frmRemove" asp-action="RemoveItem">
+    <input id="hdnProductId" type="hidden" name="productId" />
+</form>
+
 @section Scripts {
     <script>
         const btnEmpty = document.getElementById("btnEmptyCart");

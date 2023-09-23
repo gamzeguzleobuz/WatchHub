@@ -13,6 +13,7 @@ namespace ApplicationCore.Services
         public IBasketService _basketService { get; }
         public IRepository<Order> _orderRepo { get; }
 
+        private readonly IBasketService _basketService;
         public OrderService(IBasketService basketService, IRepository<Order> orderRepo)
         {
             _basketService = basketService;
@@ -21,9 +22,11 @@ namespace ApplicationCore.Services
 
 
 
+        }
         public async Task<Order> CreateOrderAsync(string buyerId, Address shippingAddress)
         {
             var basket = await _basketService.GetOrCreateBasketAsync(buyerId);
+
 
             Order order = new Order()
             {
